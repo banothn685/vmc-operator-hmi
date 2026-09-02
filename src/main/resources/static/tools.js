@@ -109,7 +109,7 @@ function confirmSetup(button, setupType) {
     }
 
     fetch(
-        `/api/workpieces/1/setup/${setupType}?status=CONFIRMED`,
+       
         {
             method: "PUT"
         }

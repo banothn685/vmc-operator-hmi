@@ -69,14 +69,14 @@ function loadReadyReview() {
                 check => check.status === "CONFIRMED"
             );
 
-        const allToolsConfirmed =
-            Array.isArray(operationTools) &&
-            operationTools.length > 0 &&
-            operationTools.every(
-                operationTool =>
-                    operationTool.tool &&
-                    operationTool.tool.status === "CONFIRMED"
-            );
+			const allToolsConfirmed =
+			    Array.isArray(operationTools) &&
+			    operationTools.length > 0 &&
+			    operationTools.every(
+			        operationTool =>
+			            operationTool.tool &&
+			            operationTool.tool.status === "CONFIRMED"
+			    );
 
         const workpieceReady =
             workpiece &&

@@ -103,7 +103,7 @@ function goNext() {
 
     if (confirmedChecks === totalChecks && totalChecks > 0) {
 
-        window.location.href = "/tools";
+        window.location.href = "/workpiece";
     }
 }
 
