@@ -1,161 +1,49 @@
-const operationId = 1;
+// workpiece.js
 
-let requiredTools = [];
-let confirmedTools = 0;
+// Define all setup items
+let setupItems = [
+    { id: "FIXTURE", confirmed: false },
+    { id: "ORIENTATION", confirmed: false },
+    { id: "CLAMPING", confirmed: false },
+    { id: "MATERIAL", confirmed: false },
+    { id: "WORK_OFFSET", confirmed: false }
+];
 
-function loadTools() {
+let confirmedCount = 0;
 
-    fetch(`/api/operations/${operationId}/tools`)
-        .then(response => {
+// Confirm a setup item
+function confirmSetup(button, setupId) {
+    const item = setupItems.find(i => i.id === setupId);
 
-            if (!response.ok) {
-                throw new Error("Failed to load required tools");
-            }
+    if (!item || item.confirmed) return;
 
-            return response.json();
-        })
-        .then(operationTools => {
+    item.confirmed = true;
+    confirmedCount++;
 
-            requiredTools = operationTools;
+    // Update button
+    button.textContent = "✓ CONFIRMED";
+    button.disabled = true;
 
-            const toolList =
-                document.getElementById("toolList");
+    // Highlight confirmed item
+    button.parentElement.classList.add("confirmed");
 
-            toolList.innerHTML = "";
-
-            confirmedTools = 0;
-
-            operationTools.forEach(operationTool => {
-
-                const tool = operationTool.tool;
-
-                if (!tool) {
-                    return;
-                }
-
-                const item =
-                    document.createElement("div");
-
-                item.classList.add("tool-item");
-
-                const isConfirmed =
-                    tool.status === "CONFIRMED";
-
-                if (isConfirmed) {
-                    item.classList.add("confirmed");
-                    confirmedTools++;
-                }
-
-                item.innerHTML = `
-                    <div>
-                        <strong>${tool.toolNumber}</strong>
-                        <span>${tool.toolName}</span>
-                    </div>
-
-                    <button
-                        onclick="confirmTool(this, ${tool.id})"
-                        ${isConfirmed ? "disabled" : ""}>
-                        ${isConfirmed ? "✓ CONFIRMED" : "CONFIRM"}
-                    </button>
-                `;
-
-                toolList.appendChild(item);
-            });
-
-            updateStatus();
-        })
-		.catch(error => {
-
-		    console.error(
-		        "Error loading required tools:",
-		        error
-		    );
-
-		    document.getElementById("toolList").innerHTML =
-		        "<p>Failed to load required tools.</p><p>" +
-		        error.message +
-		        "</p>";
-		});
+    updateStatus();
 }
 
-function confirmTool(button, toolId) {
-
-    fetch(`/api/tools/${toolId}/status?status=CONFIRMED`, {
-        method: "PUT"
-    })
-        .then(response => {
-
-            if (!response.ok) {
-                throw new Error("Failed to confirm tool");
-            }
-
-            return response.json();
-        })
-        .then(tool => {
-
-            const item =
-                button.parentElement;
-
-            item.classList.add("confirmed");
-
-            button.textContent =
-                "✓ CONFIRMED";
-
-            button.disabled = true;
-
-            confirmedTools++;
-
-            updateStatus();
-        })
-        .catch(error => {
-
-            console.error(
-                "Error confirming tool:",
-                error
-            );
-        });
-}
-
+// Update status text and NEXT button
 function updateStatus() {
+    const status = document.getElementById("setupStatus");
+    const nextButton = document.getElementById("nextButton");
 
-    const status =
-        document.getElementById("toolStatus");
+    status.textContent = `${confirmedCount} of ${setupItems.length} setup items confirmed`;
 
-    const nextButton =
-        document.getElementById("nextButton");
-
-    const totalTools =
-        requiredTools.length;
-
-    status.textContent =
-        confirmedTools +
-        " of " +
-        totalTools +
-        " tools confirmed";
-
-    if (confirmedTools === totalTools && totalTools > 0) {
-
-        status.textContent =
-            "All required tools confirmed ✓";
-
-        nextButton.disabled = false;
-
-    } else {
-
-        nextButton.disabled = true;
-    }
+    // Enable NEXT only when all confirmed
+    nextButton.disabled = !(confirmedCount === setupItems.length);
 }
 
+// Go to next page
 function goNext() {
-
-    if (
-        confirmedTools === requiredTools.length &&
-        requiredTools.length > 0
-    ) {
-
-        window.location.href =
-            "/workpiece";
+    if (confirmedCount === setupItems.length) {
+        window.location.href = "/readyreview";
     }
 }
-
-loadTools();
