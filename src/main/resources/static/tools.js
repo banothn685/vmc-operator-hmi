@@ -1,4 +1,4 @@
-```javascript
+
 let confirmedItems = 0;
 
 const totalItems = 5;
@@ -199,4 +199,3 @@ function goNext() {
 
 
 loadWorkpiece();
-```
