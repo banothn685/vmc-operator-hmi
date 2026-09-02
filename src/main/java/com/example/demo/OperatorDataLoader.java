@@ -1,9 +1,11 @@
 package com.example.demo;
 
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Component
+@Order(2)
 public class OperatorDataLoader implements CommandLineRunner {
 
     private final OperatorRepository operatorRepository;
