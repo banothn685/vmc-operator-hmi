@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VMC - Required Tools</title>
+
+    <link rel="stylesheet" href="/tools.css">
+
+</head>
+
+<body>
+
+<div class="page">
+
+    <header>
+
+        <div>
+            <h1>VMC OPERATOR HMI</h1>
+            <p>Startup Guidance</p>
+        </div>
+
+        <div class="machine-status">
+            <span></span>
+            MACHINE ONLINE
+        </div>
+
+    </header>
+
+
+    <div class="progress">
+
+        <div class="step completed">1. Machine Checks</div>
+
+        <div class="step active">2. Required Tools</div>
+
+        <div class="step">3. Workpiece Setup</div>
+
+        <div class="step">4. Ready Review</div>
+
+        <div class="step">5. Operation</div>
+
+    </div>
+
+
+    <main>
+
+        <h2>Required Tools</h2>
+
+        <p class="instruction">
+            Insert and confirm each required tool for the operation.
+        </p>
+
+
+        <!-- Tools will come from API -->
+        <div class="tool-list" id="toolList">
+
+            <p>Loading tools...</p>
+
+        </div>
+
+
+        <div class="bottom">
+
+            <div id="toolStatus">
+                0 of 0 tools confirmed
+            </div>
+
+            <button id="nextButton"
+                    onclick="goNext()"
+                    disabled>
+
+                NEXT →
+
+            </button>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script src="/tools.js"></script>
+
+</body>
+
+</html>

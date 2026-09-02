@@ -1,0 +1,247 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #eef3f5;
+    color: #18313b;
+}
+
+.page {
+    max-width: 1100px;
+    margin: 30px auto;
+    padding: 20px;
+}
+
+/* Header */
+header {
+    background: #0c5364;
+    color: white;
+    padding: 25px;
+    border-radius: 10px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 25px;
+}
+
+header p {
+    margin: 6px 0 0;
+}
+
+.machine-status {
+    background: white;
+    color: #16803c;
+    padding: 10px 15px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.machine-status span {
+    display: inline-block;
+    width: 9px;
+    height: 9px;
+    background: #22a447;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+
+/* Progress steps */
+.progress {
+    display: flex;
+    margin: 20px 0;
+}
+
+.step {
+    flex: 1;
+    padding: 12px;
+    text-align: center;
+    background: white;
+    border-right: 1px solid #ddd;
+    font-size: 13px;
+}
+
+.step.active {
+    background: #0c5364;
+    color: white;
+    font-weight: bold;
+}
+
+.step.completed {
+    background: #eaf7ed;
+    color: #238b45;
+    font-weight: bold;
+}
+
+/* Main */
+main {
+    background: white;
+    padding: 35px;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+}
+
+h2 {
+    margin-top: 0;
+    color: #0c5364;
+}
+
+.instruction {
+    color: #667781;
+    margin-bottom: 25px;
+}
+
+/* Tools */
+.tool-list {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.tool-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 20px;
+
+    background: #f8fafb;
+    border: 1px solid #d6e0e3;
+    border-radius: 8px;
+}
+
+.tool-item div {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.tool-item strong {
+    color: #0c5364;
+    font-size: 18px;
+}
+
+.tool-item span {
+    color: #667781;
+}
+
+/* Confirm button */
+.tool-item button {
+    padding: 10px 18px;
+
+    border: none;
+    border-radius: 5px;
+
+    background: #0c5364;
+    color: white;
+
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.tool-item button:hover {
+    opacity: 0.9;
+}
+
+/* Confirmed tool */
+.tool-item.confirmed {
+    background: #eaf7ed;
+    border-color: #55a968;
+}
+
+.tool-item.confirmed button {
+    background: #238b45;
+}
+
+/* Bottom */
+.bottom {
+    margin-top: 30px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#toolStatus {
+    font-weight: bold;
+    color: #536870;
+}
+
+/* Next button */
+#nextButton {
+    padding: 13px 30px;
+
+    border: none;
+    border-radius: 6px;
+
+    background: #0c5364;
+    color: white;
+
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#nextButton:disabled {
+    background: #aebbc0;
+    cursor: not-allowed;
+}
+
+#nextButton:not(:disabled):hover {
+    opacity: 0.9;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+
+    .page {
+        margin: 10px auto;
+        padding: 10px;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .progress {
+        flex-direction: column;
+    }
+
+    .step {
+        border-right: none;
+        border-bottom: 1px solid #ddd;
+    }
+
+    main {
+        padding: 20px;
+    }
+
+    .tool-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+
+    .tool-item button {
+        width: 100%;
+    }
+
+    .bottom {
+        flex-direction: column;
+        gap: 15px;
+        align-items: stretch;
+    }
+
+    #nextButton {
+        width: 100%;
+    }
+}

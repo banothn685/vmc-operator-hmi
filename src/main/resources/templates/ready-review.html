@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VMC - Ready Review</title>
+    <link rel="stylesheet" href="/ready-review.css">
+</head>
+
+<body>
+
+<div class="page">
+
+    <header>
+        <div>
+            <h1>VMC OPERATOR HMI</h1>
+            <p>Startup Guidance</p>
+        </div>
+
+        <div class="machine-status">
+            <span></span>
+            MACHINE ONLINE
+        </div>
+    </header>
+
+    <div class="progress">
+
+        <div class="step completed">
+            1. Machine Checks
+        </div>
+
+        <div class="step completed">
+            2. Required Tools
+        </div>
+
+        <div class="step completed">
+            3. Workpiece Setup
+        </div>
+
+        <div class="step active">
+            4. Ready Review
+        </div>
+
+        <div class="step">
+            5. Operation
+        </div>
+
+    </div>
+
+    <main>
+
+        <h2>Ready Review</h2>
+
+        <p class="instruction">
+            Review all startup conditions before starting the operation.
+        </p>
+
+        <div class="review-list">
+
+            <div class="review-item" id="machineCheck">
+                <div class="icon">✓</div>
+
+                <div>
+                    <strong>Machine Checks</strong>
+                    <span>Checking machine conditions...</span>
+                </div>
+
+                <b>CHECKING</b>
+            </div>
+
+            <div class="review-item" id="toolCheck">
+                <div class="icon">✓</div>
+
+                <div>
+                    <strong>Required Tools</strong>
+                    <span>Checking required tools...</span>
+                </div>
+
+                <b>CHECKING</b>
+            </div>
+
+            <div class="review-item" id="workpieceCheck">
+                <div class="icon">✓</div>
+
+                <div>
+                    <strong>Workpiece Setup</strong>
+                    <span>Checking workpiece setup...</span>
+                </div>
+
+                <b>CHECKING</b>
+            </div>
+
+        </div>
+
+        <div class="ready-box">
+
+            <div class="ready-light"></div>
+
+            <div>
+
+                <strong id="readyMessage">
+                    CHECKING SYSTEM...
+                </strong>
+
+                <p id="readyDescription">
+                    Checking machine, tools and workpiece status...
+                </p>
+
+            </div>
+
+        </div>
+
+        <div class="bottom">
+
+            <button class="back-button" onclick="goBack()">
+                ← BACK
+            </button>
+
+            <button class="start-button"
+                    id="startButton"
+                    onclick="startOperation()"
+                    disabled>
+                START OPERATION →
+            </button>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="/ready-review.js"></script>
+
+</body>
+</html>

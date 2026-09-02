@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VMC - Machine Checks</title>
+
+    <link rel="stylesheet" href="/machine-checks.css">
+</head>
+
+<body>
+
+<div class="page">
+
+    <header>
+
+        <div>
+            <h1>VMC OPERATOR HMI</h1>
+            <p>Startup Guidance</p>
+        </div>
+
+        <div class="machine-status">
+            <span></span>
+            MACHINE ONLINE
+        </div>
+
+    </header>
+
+
+    <div class="progress">
+
+        <div class="step active">
+            1. Machine Checks
+        </div>
+
+        <div class="step">
+            2. Required Tools
+        </div>
+
+        <div class="step">
+            3. Workpiece Setup
+        </div>
+
+        <div class="step">
+            4. Ready Review
+        </div>
+
+        <div class="step">
+            5. Operation
+        </div>
+
+    </div>
+
+
+    <main>
+
+        <h2>Machine Checks</h2>
+
+        <p class="instruction">
+            Confirm each machine condition before proceeding.
+        </p>
+
+
+        <!-- Checks will come from database -->
+
+        <div class="checks" id="checkList">
+            <p>Loading machine checks...</p>
+        </div>
+
+
+        <div class="bottom">
+
+            <div id="checkStatus">
+                0 of 0 checks confirmed
+            </div>
+
+            <button id="nextButton"
+                    onclick="goNext()"
+                    disabled>
+                NEXT →
+            </button>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<script src="/machine-checks.js"></script>
+
+</body>
+
+</html>

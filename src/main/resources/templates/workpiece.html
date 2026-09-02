@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VMC - Workpiece Setup</title>
+    <link rel="stylesheet" href="/workpiece.css">
+</head>
+
+<body>
+
+<div class="page">
+
+    <header>
+
+        <div>
+            <h1>VMC OPERATOR HMI</h1>
+            <p>Startup Guidance</p>
+        </div>
+
+        <div class="machine-status">
+            <span></span>
+            MACHINE ONLINE
+        </div>
+
+    </header>
+
+    <div class="progress">
+
+        <div class="step completed">
+            1. Machine Checks
+        </div>
+
+        <div class="step completed">
+            2. Required Tools
+        </div>
+
+        <div class="step active">
+            3. Workpiece Setup
+        </div>
+
+        <div class="step">
+            4. Ready Review
+        </div>
+
+        <div class="step">
+            5. Operation
+        </div>
+
+    </div>
+
+    <main>
+
+        <h2>Workpiece Setup</h2>
+
+        <p class="instruction">
+            Arrange and confirm all workpiece setup requirements.
+        </p>
+
+        <div class="setup-list">
+
+            <div class="setup-item">
+
+                <div>
+                    <strong>Fixture</strong>
+                    <span id="fixture">Loading...</span>
+                </div>
+
+                <button onclick="confirmSetup(this, 'FIXTURE')">
+                    CONFIRM
+                </button>
+
+            </div>
+
+            <div class="setup-item">
+
+                <div>
+                    <strong>Workpiece Orientation</strong>
+                    <span id="orientation">Loading...</span>
+                </div>
+
+                <button onclick="confirmSetup(this, 'ORIENTATION')">
+                    CONFIRM
+                </button>
+
+            </div>
+
+            <div class="setup-item">
+
+                <div>
+                    <strong>Clamping Instruction</strong>
+                    <span>
+                        Secure workpiece firmly in fixture
+                    </span>
+                </div>
+
+                <button onclick="confirmSetup(this, 'CLAMPING')">
+                    CONFIRM
+                </button>
+
+            </div>
+
+            <div class="setup-item">
+
+                <div>
+                    <strong>Material / Drawing Revision</strong>
+                    <span id="material">Loading...</span>
+                </div>
+
+                <button onclick="confirmSetup(this, 'MATERIAL')">
+                    CONFIRM
+                </button>
+
+            </div>
+
+            <div class="setup-item">
+
+                <div>
+                    <strong>Work Offset</strong>
+                    <span id="workOffset">Loading...</span>
+                </div>
+
+                <button onclick="confirmSetup(this, 'WORK_OFFSET')">
+                    CONFIRM
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="bottom">
+
+            <div id="setupStatus">
+                0 of 5 setup items confirmed
+            </div>
+
+            <button id="nextButton"
+                    onclick="goNext()"
+                    disabled>
+                NEXT →
+            </button>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="/workpiece.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VMC Operator HMI - Login</title>
+
+    <link rel="stylesheet" href="/login.css">
+</head>
+
+<body>
+
+<div class="login-page">
+
+    <div class="login-card">
+
+        <div class="machine-icon">
+            ⚙
+        </div>
+
+        <h1>VMC OPERATOR HMI</h1>
+
+        <p class="subtitle">
+            Startup Guidance System
+        </p>
+
+        <div class="system-status">
+            <span></span>
+            SYSTEM ONLINE
+        </div>
+
+		<form id="loginForm" action="/login" method="post">
+
+		    <div class="form-group">
+
+		        <label for="username">Operator Username</label>
+
+		        <input
+		            type="text"
+		            id="username"
+		            name="username"
+		            placeholder="Enter username"
+		            required
+		        >
+
+		    </div>
+
+		    <div class="form-group">
+
+		        <label for="password">Password</label>
+
+		        <input
+		            type="password"
+		            id="password"
+		            name="password"
+		            placeholder="Enter password"
+		            required
+		        >
+
+		    </div>
+
+		    <p id="errorMessage" class="error-message"
+		       th:if="${error}"
+		       th:text="${error}">
+		    </p>
+
+		    <button type="submit">
+		        LOGIN
+		    </button>
+
+		</form>
+
+        <div class="machine-info">
+            <div>
+                <strong>Machine</strong>
+                <span>VMC-01</span>
+            </div>
+
+            <div>
+                <strong>Operator</strong>
+                <span>Authorized</span>
+            </div>
+        </div>
+
+        <p class="footer">
+            VMC Operator HMI © 2026
+        </p>
+
+    </div>
+
+</div>
+
+<script src="/js/login.js"></script>
+
+</body>
+</html>

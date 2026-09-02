@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>VMC - Operation</title>
+
+    <link rel="stylesheet" href="/operation.css">
+</head>
+
+<body>
+
+<div class="page">
+
+    <header>
+
+        <div>
+            <h1>VMC OPERATOR HMI</h1>
+            <p>Machining Operation</p>
+        </div>
+
+        <div id="machineStatus" class="machine-status ready">
+            <span></span>
+            READY
+        </div>
+
+    </header>
+
+    <div class="progress">
+
+        <div class="step completed">
+            1. Machine Checks
+        </div>
+
+        <div class="step completed">
+            2. Required Tools
+        </div>
+
+        <div class="step completed">
+            3. Workpiece Setup
+        </div>
+
+        <div class="step completed">
+            4. Ready Review
+        </div>
+
+        <div class="step active">
+            5. Operation
+        </div>
+
+    </div>
+
+    <main>
+
+        <div class="operation-header">
+
+            <div>
+                <h2>VMC Aluminium Plate Machining</h2>
+
+                <p>
+                    Machine: <strong>VMC-01</strong>
+                </p>
+            </div>
+
+            <div class="operation-state" id="operationState">
+                READY
+            </div>
+
+        </div>
+
+
+        <div class="machine-panel">
+
+            <div class="machine-value">
+                <span>SPINDLE SPEED</span>
+                <strong id="spindle">0 RPM</strong>
+            </div>
+
+            <div class="machine-value">
+                <span>FEED RATE</span>
+                <strong id="feed">0 mm/min</strong>
+            </div>
+
+            <div class="machine-value">
+                <span>PROGRAM</span>
+                <strong>VMC-AL-001</strong>
+            </div>
+
+            <div class="machine-value">
+                <span>PROGRESS</span>
+                <strong id="progressValue">0%</strong>
+            </div>
+
+        </div>
+
+
+        <div class="progress-container">
+
+            <div class="progress-bar">
+
+                <div id="progressFill"></div>
+
+            </div>
+
+        </div>
+
+
+        <div class="message" id="message">
+
+            System ready. Press START to begin operation.
+
+        </div>
+
+
+        <div class="controls">
+
+            <button
+                id="startButton"
+                class="start"
+                onclick="startOperation()">
+
+                ▶ START
+
+            </button>
+
+            <button
+                id="stopButton"
+                class="stop"
+                onclick="stopOperation()"
+                disabled>
+
+                ■ STOP
+
+            </button>
+
+        </div>
+
+
+        <div class="safety">
+
+            <strong>⚠ OPERATOR SAFETY</strong>
+
+            <p>
+                Keep machine guards closed during operation.
+                Stop the machine immediately if an unsafe condition occurs.
+            </p>
+
+        </div>
+
+    </main>
+
+</div>
+
+<script src="/operation.js"></script>
+
+</body>
+</html>
