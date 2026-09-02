@@ -23,43 +23,55 @@ public class OperationDataLoader implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
-        if (operationRepository.count() == 0) {
+        Operation faceMilling =
+                operationRepository.findById(1).orElse(null);
 
-            Tool faceMill = toolRepository.findByToolNumber("T01");
-            Tool drill = toolRepository.findByToolNumber("T02");
-            Tool endMill = toolRepository.findByToolNumber("T03");
+        Operation drilling =
+                operationRepository.findById(2).orElse(null);
 
-            Operation faceMilling = new Operation();
-            faceMilling.setOperationName("Face Milling");
-            faceMilling.setStatus("PENDING");
+        Operation pocketMilling =
+                operationRepository.findById(3).orElse(null);
 
-            Operation drilling = new Operation();
-            drilling.setOperationName("Drilling");
-            drilling.setStatus("PENDING");
+        Tool faceMill =
+                toolRepository.findByToolNumber("T01");
 
-            Operation pocketMilling = new Operation();
-            pocketMilling.setOperationName("Pocket Milling");
-            pocketMilling.setStatus("PENDING");
+        Tool drill =
+                toolRepository.findByToolNumber("T02");
 
-            operationRepository.save(faceMilling);
-            operationRepository.save(drilling);
-            operationRepository.save(pocketMilling);
+        Tool endMill =
+                toolRepository.findByToolNumber("T03");
 
-            OperationTool ot1 = new OperationTool();
-            ot1.setOperation(faceMilling);
-            ot1.setTool(faceMill);
+        if (faceMilling != null
+                && faceMill != null
+                && operationToolRepository.findByOperationId(1).isEmpty()) {
 
-            OperationTool ot2 = new OperationTool();
-            ot2.setOperation(drilling);
-            ot2.setTool(drill);
+            OperationTool operationTool = new OperationTool();
+            operationTool.setOperation(faceMilling);
+            operationTool.setTool(faceMill);
 
-            OperationTool ot3 = new OperationTool();
-            ot3.setOperation(pocketMilling);
-            ot3.setTool(endMill);
+            operationToolRepository.save(operationTool);
+        }
 
-            operationToolRepository.save(ot1);
-            operationToolRepository.save(ot2);
-            operationToolRepository.save(ot3);
+        if (drilling != null
+                && drill != null
+                && operationToolRepository.findByOperationId(2).isEmpty()) {
+
+            OperationTool operationTool = new OperationTool();
+            operationTool.setOperation(drilling);
+            operationTool.setTool(drill);
+
+            operationToolRepository.save(operationTool);
+        }
+
+        if (pocketMilling != null
+                && endMill != null
+                && operationToolRepository.findByOperationId(3).isEmpty()) {
+
+            OperationTool operationTool = new OperationTool();
+            operationTool.setOperation(pocketMilling);
+            operationTool.setTool(endMill);
+
+            operationToolRepository.save(operationTool);
         }
     }
 }
