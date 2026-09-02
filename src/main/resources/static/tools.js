@@ -182,10 +182,7 @@ function updateStatus() {
         nextButton.disabled = true;
 
     }
-
 }
-
-
 function goNext() {
 
     if (confirmedItems === totalItems) {
@@ -194,8 +191,5 @@ function goNext() {
             "/readyreview";
 
     }
-
 }
-
-
 loadWorkpiece();
