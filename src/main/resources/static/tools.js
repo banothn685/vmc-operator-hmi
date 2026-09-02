@@ -1,49 +1,202 @@
-// workpiece.js
+```javascript
+let confirmedItems = 0;
 
-// Define all setup items
-let setupItems = [
-    { id: "FIXTURE", confirmed: false },
-    { id: "ORIENTATION", confirmed: false },
-    { id: "CLAMPING", confirmed: false },
-    { id: "MATERIAL", confirmed: false },
-    { id: "WORK_OFFSET", confirmed: false }
-];
+const totalItems = 5;
 
-let confirmedCount = 0;
+function loadWorkpiece() {
 
-// Confirm a setup item
-function confirmSetup(button, setupId) {
-    const item = setupItems.find(i => i.id === setupId);
+    fetch("/api/workpieces/1")
 
-    if (!item || item.confirmed) return;
+        .then(response => {
 
-    item.confirmed = true;
-    confirmedCount++;
+            if (!response.ok) {
 
-    // Update button
-    button.textContent = "✓ CONFIRMED";
-    button.disabled = true;
+                throw new Error("Failed to load workpiece");
 
-    // Highlight confirmed item
-    button.parentElement.classList.add("confirmed");
+            }
 
-    updateStatus();
+            return response.json();
+
+        })
+
+        .then(workpiece => {
+
+            document.getElementById("material").textContent =
+                workpiece.material;
+
+            document.getElementById("fixture").textContent =
+                workpiece.fixture;
+
+            document.getElementById("orientation").textContent =
+                workpiece.orientation;
+
+            document.getElementById("workOffset").textContent =
+                workpiece.workOffset;
+
+            const items =
+                document.querySelectorAll(".setup-item");
+
+            const statuses = [
+
+                workpiece.fixtureStatus,
+
+                workpiece.orientationStatus,
+
+                workpiece.clampingStatus,
+
+                workpiece.materialStatus,
+
+                workpiece.workOffsetStatus
+
+            ];
+
+            confirmedItems = 0;
+
+            items.forEach((item, index) => {
+
+                const button =
+                    item.querySelector("button");
+
+                if (statuses[index] === "CONFIRMED") {
+
+                    item.classList.add("confirmed");
+
+                    button.textContent =
+                        "✓ CONFIRMED";
+
+                    button.disabled = true;
+
+                    confirmedItems++;
+
+                } else {
+
+                    item.classList.remove("confirmed");
+
+                    button.textContent =
+                        "CONFIRM";
+
+                    button.disabled = false;
+
+                }
+
+            });
+
+            updateStatus();
+
+        })
+
+        .catch(error => {
+
+            console.error(
+                "Error loading workpiece:",
+                error
+            );
+
+        });
+
 }
 
-// Update status text and NEXT button
-function updateStatus() {
-    const status = document.getElementById("setupStatus");
-    const nextButton = document.getElementById("nextButton");
 
-    status.textContent = `${confirmedCount} of ${setupItems.length} setup items confirmed`;
+function confirmSetup(button, setupType) {
 
-    // Enable NEXT only when all confirmed
-    nextButton.disabled = !(confirmedCount === setupItems.length);
-}
+    const item =
+        button.parentElement;
 
-// Go to next page
-function goNext() {
-    if (confirmedCount === setupItems.length) {
-        window.location.href = "/readyreview";
+    if (item.classList.contains("confirmed")) {
+
+        return;
+
     }
+
+    fetch(
+        `/api/workpieces/1/setup/${setupType}?status=CONFIRMED`,
+        {
+            method: "PUT"
+        }
+    )
+
+        .then(response => {
+
+            if (!response.ok) {
+
+                throw new Error(
+                    "Failed to update workpiece setup"
+                );
+
+            }
+
+            return response.json();
+
+        })
+
+        .then(workpiece => {
+
+            item.classList.add("confirmed");
+
+            button.textContent =
+                "✓ CONFIRMED";
+
+            button.disabled = true;
+
+            confirmedItems++;
+
+            updateStatus();
+
+        })
+
+        .catch(error => {
+
+            console.error(
+                "Workpiece update error:",
+                error
+            );
+
+        });
+
 }
+
+
+function updateStatus() {
+
+    const status =
+        document.getElementById("setupStatus");
+
+    const nextButton =
+        document.getElementById("nextButton");
+
+    status.textContent =
+        confirmedItems +
+        " of " +
+        totalItems +
+        " setup items confirmed";
+
+    if (confirmedItems === totalItems) {
+
+        status.textContent =
+            "Workpiece setup completed ✓";
+
+        nextButton.disabled = false;
+
+    } else {
+
+        nextButton.disabled = true;
+
+    }
+
+}
+
+
+function goNext() {
+
+    if (confirmedItems === totalItems) {
+
+        window.location.href =
+            "/readyreview";
+
+    }
+
+}
+
+
+loadWorkpiece();
+```
