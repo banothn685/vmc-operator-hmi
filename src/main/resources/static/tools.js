@@ -64,16 +64,18 @@ function loadTools() {
 
             updateStatus();
         })
-        .catch(error => {
+		.catch(error => {
 
-            console.error(
-                "Error loading required tools:",
-                error
-            );
+		    console.error(
+		        "Error loading required tools:",
+		        error
+		    );
 
-            document.getElementById("toolList").innerHTML =
-                "<p>Failed to load required tools.</p>";
-        });
+		    document.getElementById("toolList").innerHTML =
+		        "<p>Failed to load required tools.</p><p>" +
+		        error.message +
+		        "</p>";
+		});
 }
 
 function confirmTool(button, toolId) {
