@@ -2,8 +2,7 @@ package com.example.demo;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface OperatorRepository extends JpaRepository<Operator, String> {
+public interface OperatorRepository extends JpaRepository<Operator, Integer> {
 
-    Operator findByUsernameAndPassword(String username, String password);
-
+    Operator findByUsername(String username);
 }
