@@ -12,7 +12,6 @@ public class OperatorService {
     }
 
     public Operator login(String username, String password) {
-
         return operatorRepository.findByUsernameAndPassword(username, password);
     }
 }
