@@ -29,6 +29,10 @@ public class OperationToolController {
 
         for (OperationTool operationTool : operationTools) {
 
+            if (operationTool.getTool() == null) {
+                continue;
+            }
+
             Tool tool = operationTool.getTool();
 
             Map<String, Object> toolData =
@@ -42,15 +46,8 @@ public class OperationToolController {
             Map<String, Object> operationToolData =
                     new HashMap<>();
 
-            operationToolData.put(
-                    "id",
-                    operationTool.getId()
-            );
-
-            operationToolData.put(
-                    "tool",
-                    toolData
-            );
+            operationToolData.put("id", operationTool.getId());
+            operationToolData.put("tool", toolData);
 
             response.add(operationToolData);
         }

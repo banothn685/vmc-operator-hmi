@@ -1,6 +1,5 @@
 package com.example.demo;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -13,7 +12,6 @@ public class OperationTool {
 
     @ManyToOne
     @JoinColumn(name = "operation_id")
-    @JsonIgnore
     private Operation operation;
 
     @ManyToOne
