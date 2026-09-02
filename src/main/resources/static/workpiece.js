@@ -40,6 +40,8 @@ function loadWorkpiece() {
                 workpiece.workOffsetStatus
             ];
 
+            confirmedItems = 0;
+
             items.forEach((item, index) => {
 
                 const button =
@@ -55,6 +57,15 @@ function loadWorkpiece() {
                     button.disabled = true;
 
                     confirmedItems++;
+
+                } else {
+
+                    item.classList.remove("confirmed");
+
+                    button.textContent =
+                        "CONFIRM";
+
+                    button.disabled = false;
                 }
             });
 
@@ -69,6 +80,7 @@ function loadWorkpiece() {
             );
         });
 }
+
 
 function confirmSetup(button, setupType) {
 
@@ -89,6 +101,7 @@ function confirmSetup(button, setupType) {
         .then(response => {
 
             if (!response.ok) {
+
                 throw new Error(
                     "Failed to update workpiece setup"
                 );
@@ -130,6 +143,7 @@ function confirmSetup(button, setupType) {
         });
 }
 
+
 function updateStatus() {
 
     const status =
@@ -157,6 +171,7 @@ function updateStatus() {
     }
 }
 
+
 function goNext() {
 
     if (confirmedItems === totalItems) {
@@ -165,5 +180,6 @@ function goNext() {
             "/ready-review";
     }
 }
+
 
 loadWorkpiece();
